@@ -1,7 +1,18 @@
-# CarND-Controls-PID
-Self-Driving Car Engineer Nanodegree Program
-
+# PID Controller Project
 ---
+
+## Project Reflection
+
+PID controller is a feedback loop control system which is widely used in different control system applications due to its low complexity and high effectiveness. The PID controller consists of three components, which are Proportional (P), Integral (I), and Derivate (D).
+
+The proportional (P) component has the greatest effect on the vehicle steering behavior. Depending on the P gain chosen the P controller will try to steer the vehicle back to the center of the lane proportional to the Cross-Track Error (CTE). As the distance between the vehicle and the center of the lane gets bigger, higher CTE, the P controller will calculate a higher steering angle in the opposite direction of the departure to bring the vehicle back to the center of the lane. Tuning the P gain could be very challenging as if a higher value is selected then needed the controller will tend to overshot and overcorrect which will cause the controller to constantly try to bring the vehicle to the center of the lane which will result in a lot of oscillation. On the other hand, if the P gain is chosen much lower than desired, the controller will have a hard time requesting enough steering angle to correct the vehicle (i.e. in sharp curves) to address these concerns the I and D components must be used.
+
+The integral (I) component sums up all CTEs over time to eliminate any bias to the controller. For example, if the vehicle has a misalignment which is causing the vehicle to always be at a certain distance away from the center line, the I component will detect that through the sum of all CTEs and calculate additional steering request to compensate for what the controller can’t achieve.
+
+The derivate (D) component calculate the CTE rate of change to eliminate the oversteer/overshot possibly cause by the P controller, hence eliminate the oscillation of the vehicle.
+
+The hyperparameters were tuned manually. First I started with all gains set to 0, then I started increasing the P gain until the controller was able to steer the vehicle back to the center of the lane but overshoots. I then started to increase the D gain until the controller was able to keep the vehicle in the lane for most of the drive. I had to fine tune the P and D gain to make sure the vehicle can do a full lap while staying within its lane. I didn’t have to tune the I gain since the simulator is a perfect enlivenment with no road crowns or misalignment. For real world scenarios, implementing an algorithm (like Twiddle) to find the right tuning parameter for the P, I, and D gain would be beneficial and would cut down on the time needed to tune the controller manually.
+
 
 ## Dependencies
 
