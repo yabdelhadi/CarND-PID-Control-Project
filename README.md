@@ -1,5 +1,4 @@
 # PID Controller Project
----
 
 ## Project Reflection
 
